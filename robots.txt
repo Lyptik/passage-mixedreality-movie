@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://lyptik.github.io/passage-mixedreality-movie/sitemap.xml
