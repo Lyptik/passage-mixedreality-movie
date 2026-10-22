@@ -5,7 +5,10 @@ https://www.passage-mixedreality.com/ to preserve its original presentation
 during its owner's migration to GitHub Pages.
 
 The HTML retains the original Slider Revolution 5.4.8.3 layer coordinates,
-responsive breakpoints, keyframes, timings, navigation and slide transitions.
+responsive breakpoints and animation definitions. On the home page, the
+original renderer supplies the responsive layout while `../scroll-story.js`
+maps entrance and exit movements to continuous native scroll progress.
+Its automatic slideshow navigation and timed layer playback are disabled.
 The Silverscreen base stylesheet supplies the original typography defaults.
 Only browser assets are included; no WordPress backend or administration code
 is required or included.

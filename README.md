@@ -6,15 +6,18 @@ Version statique du site WordPress https://www.passage-mixedreality.com/, héber
 
 ## Présentation fidèle au site d'origine
 
-L'accueil et la page du film conservent la présentation Slider Revolution 5.4.8.3 du site d'origine : cinq diapositives plein écran, positions et dimensions des calques, points de rupture responsive, polices Open Sans et Ubuntu Condensed, transitions, animations d'entrée et de sortie, effets de survol et navigation par points, flèches du clavier, molette et gestes tactiles.
+L'accueil conserve les cinq compositions plein écran du site d'origine, leurs positions, dimensions, points de rupture responsive, polices Open Sans et Ubuntu Condensed et effets de survol. Il utilise désormais un défilement natif continu : la position dans la page pilote directement les fondus et les mouvements des calques. S'arrêter fige la transition ; remonter la joue en sens inverse. Aucun événement de molette ou de geste tactile ne déclenche un changement de diapositive. La page du film conserve son lecteur plein écran.
 
-Les paramètres d'origine sont conservés dans les attributs `data-*` des fichiers HTML. Les fichiers nécessaires au navigateur sont dans `assets/original/`. Les styles et images d'origine sont hébergés localement ; le site n'utilise aucun serveur WordPress, base de données, appel AJAX WordPress, WooCommerce ou Jetpack. Les références aux médias et aux liens de téléchargement ont été adaptées pour fonctionner dans le sous-dossier GitHub Pages et à la racine d'un futur domaine personnalisé.
+Une scène occupe l'écran dans une zone `position: sticky`, sur une page d'environ 6,6 hauteurs d'écran. Les points de navigation et les flèches mènent aux positions correspondantes avec un défilement fluide. Les touches de défilement habituelles et la barre de défilement restent natives. Les liens directs `#about`, `#behind-the-scenes`, `#credits` et `#contact` fonctionnent également.
+
+Les paramètres de placement et les directions d'animation d'origine sont conservés dans les attributs `data-*` des fichiers HTML. Le moteur d'origine calcule seulement les dimensions responsive de chaque composition ; ses animations temporelles et sa navigation automatique sont désactivées sur l'accueil. `assets/scroll-story.js` traduit les mouvements en progression de défilement et n'actualise l'affichage que lorsqu'il change. Les styles et images d'origine sont hébergés localement ; le site n'utilise aucun serveur WordPress, base de données, appel AJAX WordPress, WooCommerce ou Jetpack.
 
 Les vidéos restent sur Vimeo : bande-annonce `266423627`, film complet `417619659`, making of `244240335`. Les lecteurs intégrés utilisent `dnt=1`.
 
 ## Fichiers
 
-- `index.html` : diaporama original de l'accueil.
+- `index.html` : cinq compositions originales dans la présentation à défilement continu.
+- `assets/scroll-story.js` et `assets/scroll-story.css` : progression liée au défilement, scène fixe, navigation et gestion de la réduction des animations.
 - `home/passage-the-movie/index.html` : présentation originale du film complet, à son ancien chemin.
 - `assets/original/` : moteur du diaporama, styles, polices, images et adaptations statiques. Voir `assets/original/NOTICE.md` pour la provenance.
 - `accessible/index.html` : version linéaire de tous les contenus, utilisable sans les animations et sans JavaScript ; accessible par un lien au clavier ou depuis le message de repli sans JavaScript.
@@ -22,13 +25,13 @@ Les vidéos restent sur Vimeo : bande-annonce `266423627`, film complet `4176196
 - `wp-content/uploads/2020/05/Kit_press.zip` : kit presse original, à son ancien chemin.
 - `sitemap.xml`, `robots.txt`, `404.html` : indexation et page introuvable.
 
-Les calques interactifs et les points de navigation disposent de commandes clavier. Les préférences système de réduction des animations sont prises en compte avant l'initialisation du diaporama. La version linéaire conserve tous les crédits, y compris ceux masqués par la présentation mobile originale.
+Les calques interactifs et les points de navigation disposent de commandes clavier. Les compositions hors de la scène active sont retirées de la navigation au clavier. Une vidéo Vimeo en lecture est mise en pause lorsqu'on quitte sa section. Avec la préférence système de réduction des animations, les cinq compositions s'affichent les unes sous les autres, sans scène épinglée ni effets de transition. La version linéaire conserve tous les crédits, y compris ceux masqués par la présentation mobile originale.
 
 ## Publication et modification
 
 HTML, CSS et JavaScript statiques, sans compilation ni installation. GitHub Pages publie la branche `main`, dossier racine `/`. `.nojekyll` désactive le traitement Jekyll. Les modifications enregistrées sur `main` sont publiées automatiquement.
 
-Pour modifier la présentation fidèle : éditer les textes, styles de calque et attributs `data-frames`, `data-x`, `data-y`, `data-hoffset`, `data-voffset`, etc. dans les fichiers HTML. Les tableaux à quatre valeurs correspondent aux quatre tailles de grille d'origine. `assets/original/css/static.css` fournit uniquement l'enveloppe statique ; les définitions du moteur d'origine restent dans les fichiers fournis avec le site.
+Pour modifier la présentation : éditer les textes, styles de calque et attributs `data-frames`, `data-x`, `data-y`, `data-hoffset`, `data-voffset`, etc. dans les fichiers HTML. Les tableaux à quatre valeurs correspondent aux quatre tailles de grille d'origine. `distanceInViewports` dans `assets/scroll-story.js` règle la distance de défilement entre deux compositions ; les fenêtres d'entrée et de sortie règlent l'étagement des mouvements.
 
 Vérifier les modifications avec un serveur HTTP statique, sur ordinateur et mobile. Ne pas ouvrir le HTML directement avec `file://`, car le moteur charge certains modules JavaScript locaux par HTTP.
 
