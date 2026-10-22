@@ -7,11 +7,11 @@ body.scroll-page { margin: 0; overflow: visible !important; overflow-anchor: non
 .story-scene:first-child { opacity: 1; }
 .story-scene > .rev_slider_wrapper { width: 100%; height: 100%; }
 .story-scene .slotholder { transform-origin: center; }
-.story-nav { position: fixed; z-index: 10000; right: 30px; top: calc(50% + 30px); transform: translateY(-50%); display: grid; gap: 6px; mix-blend-mode: difference; }
-.story-dot { display: block; position: relative; width: 9px; height: 9px; border: 1px solid white; border-radius: 50%; background: linear-gradient(to top, white var(--fill, 0%), transparent var(--fill, 0%)); }
+.story-nav { position: fixed; z-index: 10000; right: 30px; top: calc(50% + 30px); transform: translateY(-50%); display: grid; gap: 6px; color: var(--nav-ink, #fff); filter: drop-shadow(0 0 1px #0004); }
+.story-dot { display: block; position: relative; width: 9px; height: 9px; border: 1px solid currentColor; border-radius: 50%; color: inherit; background: linear-gradient(to top, currentColor var(--fill, 0%), transparent var(--fill, 0%)); }
 .story-dot::before { content: ''; position: absolute; inset: -9px; }
-.story-dot:focus-visible { outline: 2px solid white; outline-offset: 7px; }
-.story-cue { position: fixed; z-index: 10000; bottom: 22px; left: 50%; transform: translateX(-50%); display: grid; justify-items: center; gap: 1px; color: white; text-decoration: none; mix-blend-mode: difference; font: 300 9px/1.7 'Open Sans',sans-serif; letter-spacing: 2px; text-transform: uppercase; }
+.story-dot:focus-visible { outline: 2px solid currentColor; outline-offset: 7px; }
+.story-cue { position: fixed; z-index: 10000; bottom: 22px; left: 50%; transform: translateX(-50%); display: grid; justify-items: center; gap: 1px; color: white; text-decoration: none; text-shadow: 0 1px 8px #0008; font: 300 9px/1.7 'Open Sans',sans-serif; letter-spacing: 2px; text-transform: uppercase; }
 .story-cue:hover { color: white; }
 .story-cue span:last-child { font-size: 22px; line-height: 1.3; }
 .story-cue:focus-visible { outline: 2px solid white; outline-offset: 7px; }

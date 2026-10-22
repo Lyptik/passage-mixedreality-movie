@@ -4,6 +4,7 @@
   if (!story) return;
   const panels = [...story.querySelectorAll('.story-scene')];
   const dots = [...document.querySelectorAll('.story-dot')];
+  const navigation = document.querySelector('.story-nav');
   const cue = document.querySelector('.story-cue');
   const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
   const sectionIds = panels.map(panel => panel.id);
@@ -175,6 +176,7 @@
         scene.background.style.transform = reduced ? 'none' : `scale(${(1 + .025 * (1 - arrival)).toFixed(4)})`;
       }
     });
+    navigation.style.setProperty('--nav-ink', active === 1 || active === 4 ? '#101010' : '#ffffff');
     dots.forEach((dot, index) => {
       dot.setAttribute('aria-current', index === active ? 'location' : 'false');
       dot.style.setProperty('--fill', (clamp(position - index + 1) * 100).toFixed(1) + '%');
