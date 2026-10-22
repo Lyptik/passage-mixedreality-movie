@@ -134,7 +134,8 @@
 
   function render() {
     request = 0;
-    const position = Math.max(0, Math.min(panels.length - 1, (window.scrollY - story.offsetTop) / segment));
+    const scrollUnit = reduced ? viewportHeight : segment;
+    const position = Math.max(0, Math.min(panels.length - 1, (window.scrollY - story.offsetTop) / scrollUnit));
     const base = Math.min(panels.length - 1, Math.floor(position));
     const fraction = position - base;
     let active = Math.min(panels.length - 1, Math.round(position));
