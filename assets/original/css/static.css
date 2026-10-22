@@ -9,6 +9,16 @@
 }
 body::before, body::after { display: none !important; }
 body { background: transparent; }
+html, body { overscroll-behavior: none; }
+/* Controls behave like buttons, while ordinary copy remains selectable. */
+[role="button"], [data-actions], .rev-btn, button,
+.story-dot, .story-cue,
+[role="button"] *, [data-actions] *, .rev-btn *, button * {
+  -webkit-user-select: none !important;
+  user-select: none !important;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
 .screen-reader-text, .accessible-link {
   position: absolute;
   width: 1px;

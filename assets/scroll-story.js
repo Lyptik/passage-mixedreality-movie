@@ -9,6 +9,8 @@
   const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
   const sectionIds = panels.map(panel => panel.id);
   const distanceInViewports = 1.4;
+  const pauseInViewports = .85;
+  const pauseFraction = pauseInViewports / (distanceInViewports + pauseInViewports);
   const scenes = [];
   let viewportHeight = 0;
   let segment = 0;
@@ -22,9 +24,9 @@
     const oldUnit = reduced ? viewportHeight : segment;
     const oldPosition = oldUnit ? (window.scrollY - story.offsetTop) / oldUnit : 0;
     viewportHeight = window.innerHeight;
-    segment = viewportHeight * distanceInViewports;
+    segment = viewportHeight * (distanceInViewports + pauseInViewports);
     document.documentElement.style.setProperty('--story-height', viewportHeight + 'px');
-    story.style.height = (viewportHeight + segment * (panels.length - 1)) + 'px';
+    story.style.height = (viewportHeight + segment * (panels.length - 1) + viewportHeight * pauseInViewports) + 'px';
     document.body.classList.toggle('story-reduced', reduced);
     if (event?.type === 'resize' && oldUnit) {
       const newUnit = reduced ? viewportHeight : segment;
@@ -136,7 +138,12 @@
   function render() {
     request = 0;
     const scrollUnit = reduced ? viewportHeight : segment;
-    const position = Math.max(0, Math.min(panels.length - 1, (window.scrollY - story.offsetTop) / scrollUnit));
+    const rawPosition = Math.max(0, (window.scrollY - story.offsetTop) / scrollUnit);
+    const section = Math.floor(rawPosition);
+    // Hold each completed layout still, then scrub the transition at its existing
+    // speed. This mapping is symmetric when scrolling back up.
+    const localProgress = clamp((rawPosition - section - pauseFraction) / (1 - pauseFraction));
+    const position = Math.min(panels.length - 1, reduced ? rawPosition : section + localProgress);
     const base = Math.min(panels.length - 1, Math.floor(position));
     const fraction = position - base;
     let active = Math.min(panels.length - 1, Math.round(position));
@@ -192,7 +199,8 @@
 
   function goTo(index, smooth) {
     index = Math.max(0, Math.min(panels.length - 1, index));
-    const top = reduced ? panels[index].offsetTop : story.offsetTop + index * segment;
+    const holdOffset = index === 0 ? 0 : viewportHeight * pauseInViewports / 2;
+    const top = reduced ? panels[index].offsetTop : story.offsetTop + index * segment + holdOffset;
     window.scrollTo({ top, behavior: smooth && !reduced ? 'smooth' : 'instant' });
   }
 
