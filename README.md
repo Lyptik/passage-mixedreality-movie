@@ -29,7 +29,7 @@ Les calques interactifs et les points de navigation disposent de commandes clavi
 
 ## Publication et modification
 
-HTML, CSS et JavaScript statiques, sans compilation ni installation. GitHub Pages publie la branche `main`, dossier racine `/`. `.nojekyll` désactive le traitement Jekyll. Les modifications enregistrées sur `main` sont publiées automatiquement.
+HTML, CSS et JavaScript statiques, sans compilation ni installation. GitHub Pages publie la branche `main`, dossier racine `/`. `.nojekyll` désactive le traitement Jekyll. Les modifications enregistrées sur `main` sont publiées automatiquement. Lors de modifications de `scroll-story.css` ou `scroll-story.js`, actualiser leur paramètre de version `?v=…` dans `index.html` pour éviter que les navigateurs réutilisent une ancienne copie en cache.
 
 Pour modifier la présentation : éditer les textes, styles de calque et attributs `data-frames`, `data-x`, `data-y`, `data-hoffset`, `data-voffset`, etc. dans les fichiers HTML. Les tableaux à quatre valeurs correspondent aux quatre tailles de grille d'origine. `distanceInViewports` dans `assets/scroll-story.js` règle la distance de défilement entre deux compositions ; les fenêtres d'entrée et de sortie règlent l'étagement des mouvements.
 
